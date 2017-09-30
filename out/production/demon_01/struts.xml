@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+<!-- 	<package name="default" namespace="/" extends="struts-default"> -->
+	
+	<package name="useraction" extends="struts-default">
+
+		<default-action-ref name="all_error"></default-action-ref>
+
+		<action name="all_error">
+			<result>/error.jsp</result>
+		</action>
+
+		<!-- 配置login.action -->
+		<action name="login" class="org.struts.useraction.UserAction" method="login">
+			<result name="success">/success.jsp</result>
+			<result name="UserNotExist">/nouser.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<!-- 配置register.action -->
+		<action name="register" class="org.struts.useraction.UserAction" method="register">
+			<result name="success">/index.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 配置show.action -->
+		<action name="show" class="org.struts.useraction.UserAction" method="show">
+			<result name="success">/show.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 配置update.action -->
+		<action name="update" class="org.struts.useraction.UserAction" method="update">
+			<result name="success" type="redirectAction">
+				<param name="actionName">show</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<!-- 配置delete.action -->
+		<action name="delete" class="org.struts.useraction.UserAction" method="delete">
+			<result name="success" type="redirectAction">
+				<param name="actionName">show</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>	
+	</package>
+	
+ 	<package name="usersearch" extends="struts-default" namespace="/search">
+ 	<!-- 配置SearchLogin -->
+		<action name="searchLogin" class="org.struts.usersearch.UserSearch" method="searchLogin">
+			<result name="success">/search.jsp</result>
+			<result name="UserNotExist">/nouser.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="searchwords" class="org.struts.usersearch.UserSearch" method="searchWords">
+			<result name="success">/search.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="addwords" class="org.struts.usersearch.UserSearch" method="addWords">
+            <result name="success">/success_add.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+	</package>
+</struts>
